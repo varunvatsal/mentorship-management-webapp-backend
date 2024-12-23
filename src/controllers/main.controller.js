@@ -308,9 +308,13 @@ const getUserDetail = asyncHandler(async (req, res) => {
 
     const [[user]] =  await connection.promise().query("select email, fullname, mobile from user where id = ?", [id])
 
+    const [skills] = await connection.promise().query("select name from skill where id in (select skillId from user_skill_map where userId = ? and status = true)", [id])
+
+    const [interests] = await connection.promise().query("select name from skill where id in (select skillId from user_skill_map where userId = ? and status = false)", [id])
+
     return res.status(200)
     .json(
-        new ApiResponse(200, user, "user fetched successfully")
+        new ApiResponse(200, {user, skills, interests}, "user fetched successfully")
     )
 })
 
