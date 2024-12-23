@@ -303,6 +303,17 @@ const findUserInterest = asyncHandler(async (req, res) => {
 
 })
 
+const getUserDetail = asyncHandler(async (req, res) => {
+    const {id} = req.user
+
+    const [[user]] =  await connection.promise().query("select email, fullname, mobile from user where id = ?", [id])
+
+    return res.status(200)
+    .json(
+        new ApiResponse(200, user, "user fetched successfully")
+    )
+})
+
 
 export {
     registerUser, 
@@ -321,7 +332,8 @@ export {
     findMentors,
     updateUserDetail,
     findUserSkill,
-    findUserInterest
+    findUserInterest,
+    getUserDetail
 }
 
 

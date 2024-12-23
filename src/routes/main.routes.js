@@ -16,7 +16,8 @@ import {
     findMentors,
     findPotentialMentor,
     findUserSkill,
-    findUserInterest
+    findUserInterest,
+    getUserDetail
 } from "../controllers/main.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 const mainRouter = Router()
@@ -38,5 +39,6 @@ mainRouter.route("/findMentors").get(verifyJWT, findMentors)
 mainRouter.route("/findPotenstialMentor").get(verifyJWT, findPotentialMentor)
 mainRouter.route("/findUserSkill").get(verifyJWT, findUserSkill)
 mainRouter.route("/findUserInterest").get(verifyJWT, findUserInterest)
+mainRouter.route("/getUserDetail").get(verifyJWT, getUserDetail)
 
 export default mainRouter
